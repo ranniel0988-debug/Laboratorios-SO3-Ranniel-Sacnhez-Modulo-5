@@ -1,0 +1,171 @@
+=============================
+
+Practica 1
+
+=============================
+
+mkdir ~/Practica1
+cd ~/Practica1/
+touch archivo{1..100}.txt
+clear
+cd ..
+ls
+rm -r practica_rsync/
+rm -r Practica1/
+clear
+mkdir ~/practica_rsync
+cd practica_rsync/
+touch prueba1{1..100}.txt
+ls
+clear
+rsync -avz /home/ranniel/practica_rsync/ ranniel@10.223.66.209:/home/ranniel/Desktop
+clear
+rsync -avz /home/ranniel/practica_rsync/ ranniel@10.223.66.209:/home/ranniel/Desktop/respaldo
+clear
+exit
+nano nota.txt
+
+==============================
+
+Practica 2
+
+==============================
+
+clear
+sudo apt update
+sudo apt install heartbeat
+sudo apt update
+sudo apt install heartbeat
+sudo apt install heartbeat -y
+sudo apt-get update
+sudo apt install heartbeat -y
+clear
+sudo systemctl status heartbeat.service
+clear
+sudo nano /etc/ha.d/ha.cf
+sudo nano /etc/ha.d/authkeys
+sudo chmod 600 /etc/ha.d/authkeys
+sudo nano /etc/ha.d/authkeys
+sudo chmod 600 /etc/ha.d/authkeys
+sudo chmod 600 /etc/ha.d/authkeys
+sudo nano /etc/ha.d/authkeys
+ls -l sudo nano /etc/ha.d/authkeys
+ls -l /etc/ha.d/authkeys
+sudo nano /etc/ha.d/haresources
+sudo systemctl status heartbeat.service
+sudo systemctl restart heartbeat.service
+ip a
+sudo systemctl status heartbeat.service
+sudo systemctl restart heartbeat.service
+sudo systemctl status heartbeat.service
+ip a
+sudo nano /etc/host
+ping ranniel1
+cat /etc/hosts
+sudo nano /etc/host
+ip a
+sudo systemctl status heartbeat.service
+sudo reboot
+sudo apt update
+sudo apt install heartbeat
+sudo nano /etc/ha.d/ha.cf
+sudo nano /etc/ha.d/authkeys
+sudo chmod 600 /etc/ha.d/authkeys
+sudo nano /etc/ha.d/haresources
+sudo nano /etc/host
+sudo systemctl restart heartbeat.service
+sudo systemctl status heartbeat.service
+ip a
+sudo reboot
+
+================================================
+
+Practica 3
+
+================================================
+Server1
+
+sudo reboot
+sudo nano /etc/keepalived/keepalived.conf
+ip a
+clear
+sudo systemctl restart keepalived
+sudo systemctl enable keepalived
+sudo systemctl status keepalived
+ip a
+sudo systemctl status apache
+sudo systemctl status apache2
+clear
+ip a
+clear
+sudo nano /var/www/html/index.html
+clear
+ip a
+sudo systemctl status ssh
+clear
+ip a
+ufw status
+sudo ufw status
+ufw allow 80/tcp
+sudo ufw allow 80/tcp
+sudo poweroff
+sudo nano /var/www/html/index.html
+sudo nano /etc/keepalived/keepalived.conf
+sudo systemctl status keepalived.service
+clear
+sudo ufw status
+clear
+ip a
+clear
+sudo poweroff
+history
+
+Server2
+
+
+cd /var/www/
+ls
+rm -r sitio1
+rm -r sitio2
+ls
+rm -r sitio1
+sudo rm -r sitio1
+sudo rm -r sitio2
+ls
+sudo rm index.html
+ls
+cear
+clear
+ls
+clear
+ls /etc/apache2/sites-available/
+clar
+clear
+sudo apt apache2
+sudo apt install apache2
+sudo systemctl status apache2
+clear
+cd /var/www/html/
+ls
+sudo rm index.html
+sudo nano index.html
+clear
+sudo apt install keepalived
+clear
+sudo nano /etc/keepalived/keepalived.conf
+sudo systemctl restart keepalived.service
+sudo systemctl status keepalived.service
+ip a
+sudo systemctl restart keepalived.service
+ip a
+ls
+sudo systemctl restart apache2
+sudo systemctl status apache2
+ip a
+cd /etc/apache2/sites-available/
+ls
+sudo nano 000-default.conf
+sudo ufw status
+sudo ufw allow 80/tcp
+clear
+history
