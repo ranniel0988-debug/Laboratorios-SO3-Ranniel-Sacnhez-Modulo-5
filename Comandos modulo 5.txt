@@ -4,24 +4,19 @@ Practica 1
 
 =============================
 
-mkdir ~/Practica1
-cd ~/Practica1/
-touch archivo{1..100}.txt
-clear
-cd ..
-ls
-rm -r practica_rsync/
-rm -r Practica1/
-clear
 mkdir ~/practica_rsync
 cd practica_rsync/
-touch prueba1{1..100}.txt
+touch prueba{1..100}.txt
 ls
 clear
-rsync -avz /home/ranniel/practica_rsync/ ranniel@10.223.66.209:/home/ranniel/Desktop
+#comando para sincronizar archivos
+rsync -avz /home/ranniel/practica_rsync/ ranniel@192.168.137.50:/home/ranniel/Desktop/respaldo
 clear
-rsync -avz /home/ranniel/practica_rsync/ ranniel@10.223.66.209:/home/ranniel/Desktop/respaldo
-clear
+sudo nano rsync.sh
+crontab -e
+
+chmod +x rsync.sh
+
 exit
 nano nota.txt
 
@@ -34,35 +29,53 @@ Practica 2
 clear
 sudo apt update
 sudo apt install heartbeat
-sudo apt update
-sudo apt install heartbeat
-sudo apt install heartbeat -y
-sudo apt-get update
 sudo apt install heartbeat -y
 clear
 sudo systemctl status heartbeat.service
 clear
 sudo nano /etc/ha.d/ha.cf
+#colocar la siguiente configuracion
+logfile /var/log/ha-log
+logfacility local0
+keepalive 2
+deadtime 10
+initdead 30
+bcast ens33
+node ranniel1
+node ranniel2
+
+
 sudo nano /etc/ha.d/authkeys
+#pega esto
+auth 3
+3 md5 ClaveSuperSecreta
+
 sudo chmod 600 /etc/ha.d/authkeys
-sudo nano /etc/ha.d/authkeys
-sudo chmod 600 /etc/ha.d/authkeys
-sudo chmod 600 /etc/ha.d/authkeys
-sudo nano /etc/ha.d/authkeys
 ls -l sudo nano /etc/ha.d/authkeys
 ls -l /etc/ha.d/authkeys
 sudo nano /etc/ha.d/haresources
-sudo systemctl status heartbeat.service
-sudo systemctl restart heartbeat.service
-ip a
-sudo systemctl status heartbeat.service
-sudo systemctl restart heartbeat.service
-sudo systemctl status heartbeat.service
-ip a
+#pegar esto en el nodo1
+ranniel1 192.168.137.100/24/ens33
+#pegar esto en nodo2
+ranniel2 192.168.137.100/24/ens33
+
 sudo nano /etc/host
+
 ping ranniel1
 cat /etc/hosts
 sudo nano /etc/host
+#debe estar de la siguiente manera
+127.0.0.1       localhost
+127.0.1.1       ranniel1
+
+192.168.137.29   ranniel1
+192.168.137.50   ranniel2
+
+#para cambiar el nombre a los nodos
+sudo hostnamectl set-hostname ranniel1
+sudo hostnamectl set-hostname ranniel2
+#Actualizar el archivo /etc/hosts
+
 ip a
 sudo systemctl status heartbeat.service
 sudo reboot
@@ -84,23 +97,35 @@ Practica 3
 
 ================================================
 Server1
-
-sudo reboot
-sudo nano /etc/keepalived/keepalived.conf
-ip a
-clear
 sudo systemctl restart keepalived
 sudo systemctl enable keepalived
 sudo systemctl status keepalived
-ip a
-sudo systemctl status apache
-sudo systemctl status apache2
-clear
-ip a
-clear
-sudo nano /var/www/html/index.html
-clear
-ip a
+cd /var/www/
+#borrar la pagina que viene por defecto
+sudo rm index.html
+cd html
+sudo nano index.html
+sudo nano /etc/keepalived/keepalived.conf
+#y en ese archivo pegar lo siguiente
+vrrp_instance VI_1 {
+    state MASTER
+    interface ens33
+    virtual_router_id 51
+    priority 100
+    advert_int 1
+
+    authentication {
+        auth_type PASS
+        auth_pass 1234
+    }
+
+    virtual_ipaddress {
+        192.168.137.210
+    }
+}
+
+
+
 sudo systemctl status ssh
 clear
 ip a
@@ -110,62 +135,8 @@ ufw allow 80/tcp
 sudo ufw allow 80/tcp
 sudo poweroff
 sudo nano /var/www/html/index.html
-sudo nano /etc/keepalived/keepalived.conf
+
 sudo systemctl status keepalived.service
-clear
-sudo ufw status
-clear
-ip a
-clear
-sudo poweroff
-history
-
-Server2
 
 
-cd /var/www/
-ls
-rm -r sitio1
-rm -r sitio2
-ls
-rm -r sitio1
-sudo rm -r sitio1
-sudo rm -r sitio2
-ls
-sudo rm index.html
-ls
-cear
-clear
-ls
-clear
-ls /etc/apache2/sites-available/
-clar
-clear
-sudo apt apache2
-sudo apt install apache2
-sudo systemctl status apache2
-clear
-cd /var/www/html/
-ls
-sudo rm index.html
-sudo nano index.html
-clear
-sudo apt install keepalived
-clear
-sudo nano /etc/keepalived/keepalived.conf
-sudo systemctl restart keepalived.service
-sudo systemctl status keepalived.service
-ip a
-sudo systemctl restart keepalived.service
-ip a
-ls
-sudo systemctl restart apache2
-sudo systemctl status apache2
-ip a
-cd /etc/apache2/sites-available/
-ls
-sudo nano 000-default.conf
-sudo ufw status
-sudo ufw allow 80/tcp
-clear
-history
+Replicar la configuracion en ambos nodos
