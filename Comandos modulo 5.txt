@@ -1,6 +1,6 @@
 =============================
 
-Practica 1
+Practica 1: Syncronizacion de carpetas con Rsync (1Pts)
 
 =============================
 
@@ -22,7 +22,7 @@ nano nota.txt
 
 ==============================
 
-Practica 2
+Practica 2: Instalacion y configuracion del Cluster (2Pts)
 
 ==============================
 
@@ -93,7 +93,7 @@ sudo reboot
 
 ================================================
 
-Practica 3
+Practica 3: Cluster de Alta Disponibilidad HTTP (1Pts)
 
 ================================================
 Server1
